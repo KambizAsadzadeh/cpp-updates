@@ -11,6 +11,7 @@ add_executable(cpp-updates
     ranges-01.cpp
     ranges-02.cpp
     ranges-03.cpp
+    ranges-04.cpp
 )
 
 install(TARGETS cpp-updates
