@@ -13,6 +13,7 @@ add_executable(cpp-updates
     ranges-03.cpp
     ranges-04.cpp
     ranges-05.cpp
+    accumulate.cpp
 )
 
 install(TARGETS cpp-updates
