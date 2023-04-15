@@ -14,6 +14,7 @@ add_executable(cpp-updates
     ranges-04.cpp
     ranges-05.cpp
     accumulate.cpp
+    span-01.cpp
 )
 
 install(TARGETS cpp-updates
