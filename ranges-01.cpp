@@ -1,4 +1,4 @@
-//!C++98
+//!-> C++98
 #include <algorithm>
 #include <iostream>
 
@@ -14,7 +14,7 @@ int main() {
 }
 
 //!C++20
-#include <iostream>
+#include <iostream
 #include <algorithm>
 #include <array>
 #include <ranges>

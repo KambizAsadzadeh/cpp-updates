@@ -9,6 +9,7 @@ add_executable(cpp-updates
     main.cpp
     optional-01.cpp
     ranges-01.cpp
+    ranges-02.cpp
 )
 
 install(TARGETS cpp-updates
