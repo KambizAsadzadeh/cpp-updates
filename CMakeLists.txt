@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(cpp-updates
     main.cpp
     optional-01.cpp
+    ranges-01.cpp
 )
 
 install(TARGETS cpp-updates
