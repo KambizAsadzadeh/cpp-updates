@@ -1,4 +1,3 @@
-//!----> Pre-C++20
 #include <iostream>
 
 int main() {
@@ -13,7 +12,6 @@ int main() {
     return 0;
 }
 
-//!----> C++20
 #include <iostream>
 #include <numeric>
 
