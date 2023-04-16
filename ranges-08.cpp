@@ -34,5 +34,5 @@ int main()
          };
 
     for (auto const& get : std::views::all(data))
-        std::cout << get.first << "" << get.second << '\n';
+        std::cout << get.first << ":" << get.second << '\n';
 }
