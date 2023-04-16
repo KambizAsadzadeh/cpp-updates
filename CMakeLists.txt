@@ -15,6 +15,7 @@ add_executable(cpp-updates
     ranges-05.cpp
     ranges-06.cpp
     ranges-07.cpp
+    ranges-08.cpp
     accumulate.cpp
     span-01.cpp
 )
