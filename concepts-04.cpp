@@ -53,10 +53,16 @@ public:
     virtual void print() = 0;
 };
 
+template <typename T>
+concept IsStandard = requires(T t) {
+    { t.get() } -> std::convertible_to<FactorStruct>;
+};
+
 class NewFactor : public BaseFactor {
 public:
     NewFactor(){}
-    NewFactor(const FactorStruct& factor){}
+    NewFactor(const FactorStruct& factor) : m_factor(factor){}
+    FactorStruct get() const { return m_factor; }
     void print() override
     {
         std::cout << m_factor.title << std::endl;
@@ -76,10 +82,15 @@ private:
 class MyFactorTmp {
 public:
     MyFactorTmp(){}
-    MyFactorTmp(const NewFactor& factor){}
+    MyFactorTmp(const FactorStruct& factor){}
 private:
     std::string fakeName() { return "I'm Fake!"; }
 };
+
+template <IsStandard T>
+FactorStruct getFactor(const T& obj) {
+    return obj.get();
+}
 
 int main() {
 
@@ -95,14 +106,15 @@ int main() {
     factorData.buyerName = p;
     factorData.description = "Apple iMac 21 arm64 (M1)";
     factorData.invoiceIssuanceDate = d;
+    factorData.invoiceNumber = 2023;
     factorData.totalAmount = 2'000;
                              factorData.terms = pt;
 
     auto myFactor = MyFactor(factorData); //!My new factor
 
-    auto newFactor = NewFactor(factorData);
+    auto newFactor = NewFactor(factorData); //! New factor (Original)
 
-    auto tmpFactor = MyFactorTmp(factorData);
+    auto tmpFactor = MyFactorTmp(factorData); //! Fake factor
 
     if constexpr (std::constructible_from<decltype(myFactor), decltype(newFactor)>)
     {
@@ -113,9 +125,24 @@ int main() {
         std::cout << " It's not Standard factor, please choose another one!\n";
     }
 
-    static_assert(std::constructible_from<MyFactor, NewFactor> == true );
-    static_assert(std::constructible_from<decltype(myFactor), decltype(newFactor)> == true );
-    static_assert(std::constructible_from<decltype(myFactor), decltype(tmpFactor)> == true );
+    auto printableData = FactorStruct();
+    printableData = getFactor(newFactor);
+
+    //!Print Factor
+    {
+        std::cout << "Unique ID:" << printableData.uniqueId << std::endl;
+        std::cout << "Title:" << printableData.title << std::endl;
+        std::cout << "Buyer Name:" << printableData.buyerName.name << std::endl;
+        std::cout << "Invoice Number:" << printableData.invoiceNumber << std::endl;
+        std::cout << "Total Amount:" << printableData.totalAmount << "$" << std::endl;
+        //ToDo...[printableData]
+    }
+
+    getFactor(tmpFactor); //Error fake factor! [Compile time]
+
+    static_assert(std::constructible_from<MyFactor, NewFactor> == true ); //OK
+    static_assert(std::constructible_from<decltype(myFactor), decltype(newFactor)> == true ); //OK
+    static_assert(std::constructible_from<decltype(myFactor), decltype(tmpFactor)> == true ); //[Compile time]
 
     return 0;
 }
