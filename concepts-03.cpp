@@ -10,7 +10,7 @@ int main() {
 
     if(std::derived_from<Developer, Person>)
     {
-        std::cout << "Developer is dericed from Person class!\n";
+        std::cout << "Developer is derived from Person class!\n";
     }
 
     static_assert( std::derived_from<Developer, Developer> == true );   // same class: true
