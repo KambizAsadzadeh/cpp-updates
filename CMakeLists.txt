@@ -21,6 +21,7 @@ add_executable(cpp-updates
     concepts-01.cpp
     concepts-02.cpp
     concepts-03.cpp
+    concepts-04.cpp
 )
 
 install(TARGETS cpp-updates
