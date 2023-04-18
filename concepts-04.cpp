@@ -49,15 +49,21 @@ private:
 
 class MyFactor {
 public:
-    MyFactor(const std::string& str): m_str(str) {}
-    std::string m_str;
+    MyFactor(const BaseFactor& factor): m_factor(factor) {}
+
+private:
+    BaseFactor m_factor;
 };
 
 int main() {
+
     if constexpr (std::constructible_from<MyFactor, BaseFactor>) {
         std::cout << "MyFactor is constructible from BaseFactor.\n";
     } else {
         std::cout << "MyFactor is not constructible from BaseFactor.\n";
     }
+
+    static_assert(std::constructible_from<MyFactor, BaseFactor> == true);
+
     return 0;
 }
