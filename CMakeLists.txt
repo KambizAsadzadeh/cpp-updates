@@ -18,6 +18,8 @@ add_executable(cpp-updates
     ranges-08.cpp
     accumulate.cpp
     span-01.cpp
+    concepts-01.cpp
+    concepts-02.cpp
 )
 
 install(TARGETS cpp-updates
